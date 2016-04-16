@@ -2,12 +2,6 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="InwxClient.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="InwxUsername" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
-    <Setting Name="InwxPasswort" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
     <Setting Name="NewRecordDefaultContent" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
@@ -18,6 +12,9 @@
       <Value Profile="(Default)">3600</Value>
     </Setting>
     <Setting Name="NewRecordDefaultName" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="InwxUsernames" Type="InwxClient.SerializableStringDictionary" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
   </Settings>

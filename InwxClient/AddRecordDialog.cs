@@ -41,8 +41,9 @@ namespace InwxClient {
                 rec.ttl = Convert.ToInt32(textBox5.Text);
                 rec.prio = Convert.ToInt32(textBox6.Text);
                 var result = Client.nameserver_createRecord(rec);
-                Program.dumpstruct(result);
-                DialogResult = DialogResult.OK;
+                Program.dumpstruct( result);
+                if (result.code < 2000)
+                    DialogResult = DialogResult.OK;
             }
             catch(Exception ex) {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);

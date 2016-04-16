@@ -26,30 +26,6 @@ namespace InwxClient.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string InwxUsername {
-            get {
-                return ((string)(this["InwxUsername"]));
-            }
-            set {
-                this["InwxUsername"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string InwxPasswort {
-            get {
-                return ((string)(this["InwxPasswort"]));
-            }
-            set {
-                this["InwxPasswort"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string NewRecordDefaultContent {
             get {
                 return ((string)(this["NewRecordDefaultContent"]));
@@ -92,6 +68,17 @@ namespace InwxClient.Properties {
             }
             set {
                 this["NewRecordDefaultName"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::InwxClient.SerializableStringDictionary InwxUsernames {
+            get {
+                return ((global::InwxClient.SerializableStringDictionary)(this["InwxUsernames"]));
+            }
+            set {
+                this["InwxUsernames"] = value;
             }
         }
     }

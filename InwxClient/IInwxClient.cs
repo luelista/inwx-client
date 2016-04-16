@@ -10,11 +10,31 @@ namespace InwxClient {
             this.user = user; this.pass = pass; this.lang = "en";
         }
     }
-    public struct LoginResult {
+    public struct InwxResult<ResDataType> {
         public int code;
         public string msg;
         [XmlRpcMissingMapping(MappingAction.Ignore)]
-        public LoginResData resData;
+        public string reasonCode;
+        [XmlRpcMissingMapping(MappingAction.Ignore)]
+        public string reason;
+        [XmlRpcMissingMapping(MappingAction.Ignore)]
+        public ResDataType resData;
+        public string svTRID;
+
+        public override string ToString() {
+            string x = "";
+            x += "code: " + code.ToString() + "\n";
+            x += "msg: " + msg + "\n";
+            x += "reasonCode: " + reasonCode + "\n";
+            x += "reason: " + reason + "\n";
+            x += "resData: ";
+            if (resData == null) x += "<NULL>";
+            else if (resData is XmlRpcStruct) x += "{\n" + Program.RpcStructToString((XmlRpcStruct)(object)resData) + "}";
+            else x += resData.ToString();
+            x += "\n";
+            x += "svTRID: " + svTRID + "\n";
+            return x;
+        }
     }
     public struct LoginResData {
         public int customerId;
@@ -37,12 +57,6 @@ namespace InwxClient {
         public NameserverInfoParameter(string domain) {
             this.domain = domain;
         }
-    }
-    public struct NameserverInfoResult {
-        public int code;
-        public string msg;
-        [XmlRpcMissingMapping(MappingAction.Ignore)]
-        public NameserverInfoResData resData;
     }
     public struct NameserverInfoResData {
         [XmlRpcMissingMapping(MappingAction.Ignore)]
@@ -83,14 +97,7 @@ namespace InwxClient {
         public int prio;
     }
 
-
-
-    public struct NameserverListResult {
-        public int code;
-        public string msg;
-        [XmlRpcMissingMapping(MappingAction.Ignore)]
-        public NameserverListResData resData;
-    }
+    
 
     public struct NameserverListResData {
         public int count;
@@ -117,22 +124,25 @@ namespace InwxClient {
     [XmlRpcUrl("https://api.domrobot.com/xmlrpc/")]
     public interface IInwxClient : IXmlRpcProxy {
         [XmlRpcMethod("account.login")]
-        LoginResult login(LoginParameter param);
+        InwxResult<LoginResData> login(LoginParameter param);
 
         [XmlRpcMethod("account.unlock")]
-        LoginResult login_unlock(UnlockParameter param);
+        InwxResult<XmlRpcStruct> login_unlock(UnlockParameter param);
+
+        [XmlRpcMethod("account.info")]
+        InwxResult<XmlRpcStruct> account_info();
 
         [XmlRpcMethod("nameserver.info")]
-        NameserverInfoResult nameserver_info(NameserverInfoParameter param);
+        InwxResult<NameserverInfoResData> nameserver_info(NameserverInfoParameter param);
 
         [XmlRpcMethod("nameserver.updateRecord")]
-        NameserverInfoResult nameserver_updateRecord(NameserverRecord param);
+        InwxResult<XmlRpcStruct> nameserver_updateRecord(NameserverRecord param);
 
         [XmlRpcMethod("nameserver.createRecord")]
-        XmlRpcStruct nameserver_createRecord(NameserverCreateRecord param);
+        InwxResult<XmlRpcStruct> nameserver_createRecord(NameserverCreateRecord param);
 
         [XmlRpcMethod("nameserver.list")]
-        NameserverListResult nameserver_list();
+        InwxResult<NameserverListResData> nameserver_list();
 
 
 
